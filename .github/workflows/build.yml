@@ -16,6 +16,8 @@ jobs:
           gradle-version: 8.12
       - name: Unzip
         run: unzip -o PikachuClient-1.21.4.zip -d proj
+      - name: Fix time changer
+        run: sed -i 's/mc.world.setTimeOfDay((long) time.i());/mc.world.getLevelProperties().setTimeOfDay((long) time.i());/' proj/src/main/java/com/pikachuclient/module/misc/TimeChangerModule.java
       - name: Build
         working-directory: proj
         run: gradle build --no-daemon
